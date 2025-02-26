@@ -1,6 +1,8 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,9 +132,35 @@ public class Password {
      */
     public static String generatePassword(int nbCar) {
 
-        // Code here
+        List<Character> uppers = List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+                'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+        List<Character> lowers = List.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+                'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+        List<Character> numbers = List.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        List<Character> specials = List.of('!', '?', '&', '#', '(', ')', '[', ']', '@', '$');
 
-        return null;
+        List<Character> password = new ArrayList<>();
+        SecureRandom random = new SecureRandom();
+
+        password.add(uppers.get(random.nextInt(uppers.size())));
+        password.add(lowers.get(random.nextInt(lowers.size())));
+        password.add(numbers.get(random.nextInt(numbers.size())));
+        password.add(specials.get(random.nextInt(specials.size())));
+
+        List<List<Character>> allCharacters = List.of(uppers, lowers, numbers, specials);
+        for (int i = 0; i < (nbCar - 4); i++) {
+            List<Character> selectedList = allCharacters.get(random.nextInt(allCharacters.size()));
+            password.add(selectedList.get(random.nextInt(selectedList.size())));
+        }
+
+        Collections.shuffle(password, random);
+
+        StringBuilder mdp = new StringBuilder(password.size());
+        for (Character character : password) {
+            mdp.append(character);
+        }
+
+        return mdp.toString();
     }
 
     public static void main(String[] args) {
