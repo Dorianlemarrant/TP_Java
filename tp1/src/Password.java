@@ -40,8 +40,13 @@ public class Password {
      */
     public static String bruteForce6Digit(String targetHash) {
 
-        // Code here
-
+        for (int i = 0; i <= 999999; i++) {
+            String nombre = String.format("%06d", i);
+            String nombre_hash = hashPassword(nombre);
+            if (nombre_hash.equals(targetHash)) {
+                return nombre;
+            }
+        }
         return null;
     }
 
@@ -61,7 +66,7 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        // Code here
+        if 
 
         return false;
     }
