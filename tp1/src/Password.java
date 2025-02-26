@@ -88,11 +88,11 @@ public class Password {
             if (Character.isWhitespace(element)) {
                 iswhitespace = true;
             }
+            if (iswhitespace) {
+                break;
+            }
         }
-        if (islength && isupper && islower && !iswhitespace && isdigit) {
-            return true;
-        }
-        return false;
+        return (islength && isupper && islower && !iswhitespace && isdigit);
     }
 
     /**
