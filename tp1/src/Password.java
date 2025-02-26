@@ -105,9 +105,15 @@ public class Password {
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
-        // Code here
+        HashMap<String, Boolean> verif = new HashMap<>();
+        for (int i = 0; i < passwords.size(); i++) {
+            String mdp = passwords.get(i);
+            boolean strong = isStrongPassword(mdp);
+            verif.put(mdp, strong);
 
-        return null;
+        }
+
+        return verif;
     }
 
     /**
