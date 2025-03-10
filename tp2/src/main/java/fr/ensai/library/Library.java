@@ -1,6 +1,5 @@
 package fr.ensai.library;
-import fr.ensai.library.Book;
-import java.util.List;
+
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,26 +12,26 @@ public class Library {
 
     // Attributes
     private String name;
-    private ArrayList<Book> books;
+    private ArrayList<Item> items;
 
     /**
      * Constructs a new Library object.
      */
-    public Library(String name, ArrayList<Book> books) {
+    public Library(String name, ArrayList<Item> items) {
         this.name = name;
-        this.books = books;
+        this.items = items;
     }
 
     public void addBook(Book book) {
-        this.books.add(book);
+        this.items.add(book);
     }
     
-    public void displayBooks() {
-        if (this.books.size() == 0) {
+    public void displayItems() {
+        if (this.items.size() == 0) {
             System.out.println("Il n'y a pas de livres");
         } else {
-            for (int i = 0; i < this.books.size(); i++) {
-                System.out.println(this.books.get(i).toString());
+            for (int i = 0; i < this.items.size(); i++) {
+                System.out.println(this.items.get(i));
             }
         }    
     }
@@ -44,9 +43,6 @@ public class Library {
      *                     {@link IOException} will be thrown.
      */
     public void loadBooksFromCSV(String filePath) {
-        addItem -> addBook;
-        author = new Author(authorName, 0, "");
-
 
         URL url = getClass().getClassLoader().getResource(filePath);
 
@@ -68,13 +64,13 @@ public class Library {
                     // Check if author already exists in the map
                     Author author = authors.get(authorName);
                     if (author == null) {
-                        author = new Author(authorName);
+                        author = new Author(authorName, 0, "");
                         authors.put(authorName, author);
                         System.out.println(author.toString());
                     }
                     Book book = new Book(isbn, title, author, year, pageCount);
 
-                    this.addIem(book);
+                    this.addBook(book);
                 }
             }
         } catch (
