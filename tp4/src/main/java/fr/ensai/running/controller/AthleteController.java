@@ -25,7 +25,7 @@ public class AthleteController {
     @GetMapping()
     public String findAllAthletes(Model model) {
         model.addAttribute("athletes", athleteService.findAll());
-        return "allAthletes"; // allAthlete.html
+        return "allAthletes"; // allAthletes.html
     }
 
     /**

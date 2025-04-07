@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fr.ensai.running.model.Athlete;
+import fr.ensai.running.model.Competition;
 import fr.ensai.running.service.AthleteService;
+import fr.ensai.running.service.CompetitionService;
 
 @RestController
 @RequestMapping("/api")
@@ -57,4 +59,31 @@ public class ApiRestController {
         athleteService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @Autowired
+    private CompetitionService competitionService;
+
+    /**
+     * Get all competitions
+     */
+    @GetMapping("/competition")
+    public List<Competition> allCompetitions() {
+        return competitionService.findAll();
+    }
+
+
+    /**
+     * Delete a competition by ID
+     */
+    @DeleteMapping("/competition/{id}")
+    public ResponseEntity<Void> deleteCompetition(@PathVariable Long id) {
+        Competition competition = competitionService.findById(id);
+        if (competition == null) {
+            return ResponseEntity.notFound().build();
+        }
+        competitionService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
